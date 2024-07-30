@@ -9,7 +9,7 @@ const protect = expressAsyncHandler(async (req, res, next) => {
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
-  ) {
+  ) { 
     try {
       token = req.headers.authorization.split(" ")[1];
 
