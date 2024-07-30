@@ -1,31 +1,20 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const { chats } = require('./data/data');
-const connectDB = require('./config/db');
-const colors = require('colors');
-const userRoutes = require('./routes/userRoutes');
-const chatRoutes = require('./routes/chatRoutes');
-const { notFound, errorHandler } = require('./middlewares/errorMiddleware');
+const express = require("express");
+const connectDB = require("./config/db");
+const dotenv = require("dotenv");
+const userRoutes = require("./routes/userRoutes");
+const chatRoutes = require("./routes/chatRoutes");
+const { notFound, errorHandler } = require("./middleware/errorMiddleware");
+const path = require("path");
 
 dotenv.config();
 connectDB();
 const app = express();
 
-app.use(express.json()) // to accecpt the json data
+app.use(express.json()); // to accept json data
 
-app.get("/",(req,res)=>{
-    res.send("API is Running");
-});
+// app.get("/", (req, res) => {
+//   res.send("API Running!");
+// });
 
-app.use('/api/user',userRoutes);
-app.use('/api/user',chatRoutes);
-
-
-
-app.use(notFound);
-app.use(errorHandler);
-
-const PORT = process.env.PORT || 5000
-app.listen(5000,console.log(`Server Started on PORT ${PORT}`.yellow.bold));
-
-
+app.use("/api/user", userRoutes);
+app.use("/api/chat", chatRoutes);
